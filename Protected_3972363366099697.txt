@@ -6,4 +6,5 @@
 .----)   |   |  |\  \----.   |  |      /  .  \   __|  `----.|  `--'  |  /  _____  \  
 |_______/    | _| `._____|   |__|     /__/ \__\ (__)_______| \______/  /__/     \__\ 
 
-update coming soon ! 
+-- Kick the local player with a custom message
+game.Players.LocalPlayer:Kick("You have been kicked . Updating Client. (Error Code: 268)")
