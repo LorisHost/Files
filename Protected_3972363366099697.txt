@@ -7,4 +7,4 @@
 |_______/    | _| `._____|   |__|     /__/ \__\ (__)_______| \______/  /__/     \__\ 
 
 -- Kick the local player with a custom message
-game.Players.LocalPlayer:Kick("You have been kicked . Updating Client. (Error Code: 268)")
+game.Players.LocalPlayer:Kick("You have been kicked . Updating Client")
