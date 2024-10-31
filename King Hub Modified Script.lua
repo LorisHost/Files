@@ -1,4 +1,3 @@
--- Modified By Tencent
 local Scripts = {
     ["Evade"] = {
         Ids = {9872472334, 10808838353, 10539706691, 10324347967, 10662542523, 10324346056},
@@ -27,7 +26,7 @@ for name, data in pairs(Scripts) do
             if not success then 
                 warn("Error executing script for '" .. name .. "' (PlaceId: " .. placeId .. "): " .. result) 
             end
-            return -- Stop after finding and executing the script
+            return
         end
     end
 end
