@@ -1,39 +1,21 @@
-local Scripts = {
-  ["Evade"] = {
-    Ids = {9872472334, 10808838353, 10539706691, 10324347967, 10662542523, 10324346056},
-    Url = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()"
-  },
-  ["Knife Ability Test"] = {
-    Ids = {621129760},
-    Url = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Knife-Ability-Test/main/Gui'))()" 
-  },
-  ["Rainbow Friends"] = {
-    Ids = {7991339063, 13622985049, 8888615802, 13622981808},
-    Url = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua'))()"
-  },
-  ["Pets GO"] = {
-    Ids = {18901165922, 19006211286},
-    Url = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Pets-Go/refs/heads/main/Main.lua'))()"
-  }
-}
-
-local placeId = game.PlaceId
-
--- Wrap the script execution in a pcall to catch any errors during loading
-local function runScript(name, url)
-  local success, result = pcall(function()
-    loadstring(game:HttpGetAsync(url))() -- Execute the loaded code immediately
-  end)
-  if not success then 
-    warn("Error in '" .. name .. "' (" .. placeId .. "): " .. tostring(result)) 
-  end
+local function run(url)
+  pcall(loadstring(url))
 end
 
-for name, data in pairs(Scripts) do
-  for _, id in ipairs(data.Ids) do
-    if id == placeId then
-      runScript(name, data.Url)
-      return -- Exit after running the script
-    end
-  end
-end
+local id = game.PlaceId
+run(({
+  [9872472334] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()",
+  [10808838353] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()",
+  [10539706691] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()",
+  [10324347967] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()",
+  [10662542523] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()",
+  [10324346056] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua'))()",
+  [621129760] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Knife-Ability-Test/main/Gui'))()",
+  [7991339063] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua'))()",
+  [13622985049] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua'))()",
+  [8888615802] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua'))()",
+  [13622981808] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua'))()",
+  [18901165922] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Pets-Go/refs/heads/main/Main.lua'))()",
+  [19006211286] = "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Pets-Go/refs/heads/main/Main.lua'))()",
+})[id] or "pcall(loadstring(game:HttpGet('https://raw.githubusercontent.com/zReal-King/Universal/refs/heads/main/Main.lua'))()")
+)
