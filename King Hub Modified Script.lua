@@ -1,19 +1,19 @@
 local Scripts = {
     ["Evade"] = {
         Ids = {9872472334, 10808838353, 10539706691, 10324347967, 10662542523, 10324346056},
-        Url = "https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua"
+        Url = "pcall(loadstring(gameHttpGet("https://raw.githubusercontent.com/zReal-King/Evade/main/Main.lua"))()
     },
     ["Knife Ability Test"] = {
         Ids = {621129760},
-        Url = "https://raw.githubusercontent.com/zReal-King/Knife-Ability-Test/main/Gui" 
+        Url = "pcall(loadstring(game:HttpGet("https://raw.githubusercontent.com/zReal-King/Knife-Ability-Test/main/Gui"))() 
     },
     ["Rainbow Friends"] = {
         Ids = {7991339063, 13622985049, 8888615802, 13622981808},
-        Url = "https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua"
+        Url = "https://raw.githubusercontent.com/zReal-King/Rainbow-Friends/main/Main.lua"))()
     },
     ["Pets GO"] = {
         Ids = {18901165922, 19006211286},
-        Url = "https://raw.githubusercontent.com/zReal-King/Pets-Go/refs/heads/main/Main.lua"
+        Url = "pcall(loadstring(game:HttpGet("https://raw.githubusercontent.com/zReal-King/Pets-Go/refs/heads/main/Main.lua"))()
     }
 }
 
