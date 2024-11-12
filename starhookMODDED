@@ -1,363 +1,241 @@
 --[[
-
+-- FORTEX ON TOP 🔝 MODDED WITH OPTIMIZING
 ]]
 
 
 
 local Drawing = loadstring(game:HttpGet("https://raw.githubusercontent.com/linemaster2/storage/main/Drawing.lua"))();
+local Library = {
+    Open = true, Accent = Color3.fromRGB(207, 227, 0), Pages = {}, Sections = {}, Flags = {}, UnNamedFlags = 0,
+    ThemeObjects = {}, Instances = {}, Holder = nil, OldSize = nil, ScreenGUI = nil, DropdownOpen = false,
+    OptionListOpen = false, 
+    Keys = { -- You could potentially shorten these keycodes, but it might reduce readability
+        [Enum.KeyCode.Space] = "Space", [Enum.KeyCode.Return] = "Return", [Enum.KeyCode.LeftShift] = "LShift",
+        [Enum.KeyCode.RightShift] = "RShift", [Enum.KeyCode.LeftControl] = "LCtrl", [Enum.KeyCode.RightControl] = "RCtrl",
+        [Enum.KeyCode.LeftAlt] = "LAlt", [Enum.KeyCode.RightAlt] = "RAlt", [Enum.KeyCode.CapsLock] = "CAPS",
+        [Enum.KeyCode.One] = "1", [Enum.KeyCode.Two] = "2", [Enum.KeyCode.Three] = "3", [Enum.KeyCode.Four] = "4",
+        [Enum.KeyCode.Five] = "5", [Enum.KeyCode.Six] = "6", [Enum.KeyCode.Seven] = "7", [Enum.KeyCode.Eight] = "8",
+        [Enum.KeyCode.Nine] = "9", [Enum.KeyCode.Zero] = "0", [Enum.KeyCode.KeypadOne] = "Num1",
+        [Enum.KeyCode.KeypadTwo] = "Num2", [Enum.KeyCode.KeypadThree] = "Num3", [Enum.KeyCode.KeypadFour] = "Num4",
+        [Enum.KeyCode.KeypadFive] = "Num5", [Enum.KeyCode.KeypadSix] = "Num6", [Enum.KeyCode.KeypadSeven] = "Num7",
+        [Enum.KeyCode.KeypadEight] = "Num8", [Enum.KeyCode.KeypadNine] = "Num9", [Enum.KeyCode.KeypadZero] = "Num0",
+        [Enum.KeyCode.Minus] = "-", [Enum.KeyCode.Equals] = "=", [Enum.KeyCode.Tilde] = "~",
+        [Enum.KeyCode.LeftBracket] = "[", [Enum.KeyCode.RightBracket] = "]", [Enum.KeyCode.RightParenthesis] = ")",
+        [Enum.KeyCode.LeftParenthesis] = "(", [Enum.KeyCode.Semicolon] = ",", [Enum.KeyCode.Quote] = "'",
+        [Enum.KeyCode.BackSlash] = "\\", [Enum.KeyCode.Comma] = ",", [Enum.KeyCode.Period] = ".",
+        [Enum.KeyCode.Slash] = "/", [Enum.KeyCode.Asterisk] = "*", [Enum.KeyCode.Plus] = "+", 
+        [Enum.KeyCode.Period] = ".", [Enum.KeyCode.Backquote] = "`", [Enum.UserInputType.MouseButton1] = "MB1",
+        [Enum.UserInputType.MouseButton2] = "MB2", [Enum.UserInputType.MouseButton3] = "MB3"
+    },
+    Connections = {}, FontSize = 12, VisValues = {}, UIKey = Enum.KeyCode.Insert, Notifs = {}
+}
 
-local Library = {};
-do
-	Library = {
-		Open = true;
-		Accent = Color3.fromRGB(207, 227, 0);
-		Pages = {};
-		Sections = {};
-		Flags = {};
-		UnNamedFlags = 0;
-		ThemeObjects = {};
-		Instances = {};
-		Holder = nil;
-		OldSize = nil;
-		ScreenGUI = nil;
-		DropdownOpen = false,
-		OptionListOpen = false,
-		Keys = {
-			[Enum.KeyCode.Space] = "Space",
-			[Enum.KeyCode.Return] = "Return",
-			[Enum.KeyCode.LeftShift] = "LShift",
-			[Enum.KeyCode.RightShift] = "RShift",
-			[Enum.KeyCode.LeftControl] = "LCtrl",
-			[Enum.KeyCode.RightControl] = "RCtrl",
-			[Enum.KeyCode.LeftAlt] = "LAlt",
-			[Enum.KeyCode.RightAlt] = "RAlt",
-			[Enum.KeyCode.CapsLock] = "CAPS",
-			[Enum.KeyCode.One] = "1",
-			[Enum.KeyCode.Two] = "2",
-			[Enum.KeyCode.Three] = "3",
-			[Enum.KeyCode.Four] = "4",
-			[Enum.KeyCode.Five] = "5",
-			[Enum.KeyCode.Six] = "6",
-			[Enum.KeyCode.Seven] = "7",
-			[Enum.KeyCode.Eight] = "8",
-			[Enum.KeyCode.Nine] = "9",
-			[Enum.KeyCode.Zero] = "0",
-			[Enum.KeyCode.KeypadOne] = "Num1",
-			[Enum.KeyCode.KeypadTwo] = "Num2",
-			[Enum.KeyCode.KeypadThree] = "Num3",
-			[Enum.KeyCode.KeypadFour] = "Num4",
-			[Enum.KeyCode.KeypadFive] = "Num5",
-			[Enum.KeyCode.KeypadSix] = "Num6",
-			[Enum.KeyCode.KeypadSeven] = "Num7",
-			[Enum.KeyCode.KeypadEight] = "Num8",
-			[Enum.KeyCode.KeypadNine] = "Num9",
-			[Enum.KeyCode.KeypadZero] = "Num0",
-			[Enum.KeyCode.Minus] = "-",
-			[Enum.KeyCode.Equals] = "=",
-			[Enum.KeyCode.Tilde] = "~",
-			[Enum.KeyCode.LeftBracket] = "[",
-			[Enum.KeyCode.RightBracket] = "]",
-			[Enum.KeyCode.RightParenthesis] = ")",
-			[Enum.KeyCode.LeftParenthesis] = "(",
-			[Enum.KeyCode.Semicolon] = ",",
-			[Enum.KeyCode.Quote] = "'",
-			[Enum.KeyCode.BackSlash] = "\\",
-			[Enum.KeyCode.Comma] = ",",
-			[Enum.KeyCode.Period] = ".",
-			[Enum.KeyCode.Slash] = "/",
-			[Enum.KeyCode.Asterisk] = "*",
-			[Enum.KeyCode.Plus] = "+",
-			[Enum.KeyCode.Period] = ".",
-			[Enum.KeyCode.Backquote] = "`",
-			[Enum.UserInputType.MouseButton1] = "MB1",
-			[Enum.UserInputType.MouseButton2] = "MB2",
-			[Enum.UserInputType.MouseButton3] = "MB3"
-		};
-		Connections = {};
-		FontSize = 12;
-		VisValues = {};
-		UIKey = Enum.KeyCode.Insert;
-		Notifs = {};
-	}
+-- // Extension
+Library.__index = Library
+Library.Pages.__index = Library.Pages
+Library.Sections.__index = Library.Sections
 
-	-- // Ignores
-	local Flags = {} -- Ignore
-	local ColorHolders = {}
+-- // Connection Function
+function Library:Connection(signal, Callback)
+    local Con = signal:Connect(Callback)
+    return Con
+end
 
-
-	-- // Extension
-	Library.__index = Library
-	Library.Pages.__index = Library.Pages
-	Library.Sections.__index = Library.Sections
-	local LocalPlayer = game:GetService('Players').LocalPlayer;
-	local Mouse = LocalPlayer:GetMouse();
-	local Players = game:GetService("Players")
-	local TweenService = game:GetService("TweenService")
-
-	-- // Misc Functions
-	do
-		function Library:Connection(signal, Callback)
-			local Con = signal:Connect(Callback)
-			return Con
-		end
-		--
 		function Library:Disconnect(Connection)
-			Connection:Disconnect()
-		end
-		--
-		function Library:Round(Number, Float)
-			return Float * math.floor(Number / Float)
-		end
-		--
-		function Library.NextFlag()
-			Library.UnNamedFlags = Library.UnNamedFlags + 1
-			return string.format("%.14g", Library.UnNamedFlags)
-		end
-		--
-		function Library:GetConfig()
-			local Config = ""
-			for Index, Value in pairs(self.Flags) do
-				if
-					Index ~= "ConfigConfig_List"
-					and Index ~= "ConfigConfig_Load"
-					and Index ~= "ConfigConfig_Save"
-				then
-					local Value2 = Value
-					local Final = ""
-					--
-					if typeof(Value2) == "Color3" then
-						local hue, sat, val = Value2:ToHSV()
-						--
-						Final = ("rgb(%s,%s,%s,%s)"):format(hue, sat, val, 1)
-					elseif typeof(Value2) == "table" and Value2.Color and Value2.Transparency then
-						local hue, sat, val = Value2.Color:ToHSV()
-						--
-						Final = ("rgb(%s,%s,%s,%s)"):format(hue, sat, val, Value2.Transparency)
-					elseif typeof(Value2) == "table" and Value.Mode then
-						local Values = Value.current
-						--
-						Final = ("key(%s,%s,%s)"):format(Values[1] or "nil", Values[2] or "nil", Value.Mode)
-					elseif Value2 ~= nil then
-						if typeof(Value2) == "boolean" then
-							Value2 = ("bool(%s)"):format(tostring(Value2))
-						elseif typeof(Value2) == "table" then
-							local New = "table("
-							--
-							for Index2, Value3 in pairs(Value2) do
-								New = New .. Value3 .. ","
-							end
-							--
-							if New:sub(#New) == "," then
-								New = New:sub(0, #New - 1)
-							end
-							--
-							Value2 = New .. ")"
-						elseif typeof(Value2) == "string" then
-							Value2 = ("string(%s)"):format(Value2)
-						elseif typeof(Value2) == "number" then
-							Value2 = ("number(%s)"):format(Value2)
-						end
-						--
-						Final = Value2
-					end
-					--
-					Config = Config .. Index .. ": " .. tostring(Final) .. "\n"
-				end
-			end
-			--
-			return Config
-		end
-		--
-		function Library:LoadConfig(Config)
-			local Table = string.split(Config, "\n")
-			local Table2 = {}
-			for Index, Value in pairs(Table) do
-				local Table3 = string.split(Value, ":")
-				--
-				if Table3[1] ~= "ConfigConfig_List" and #Table3 >= 2 then
-					local Value = Table3[2]:sub(2, #Table3[2])
-					--
-					if Value:sub(1, 3) == "rgb" then
-						local Table4 = string.split(Value:sub(5, #Value - 1), ",")
-						--
-						Value = Table4
-					elseif Value:sub(1, 3) == "key" then
-						local Table4 = string.split(Value:sub(5, #Value - 1), ",")
-						--
-						if Table4[1] == "nil" and Table4[2] == "nil" then
-							Table4[1] = nil
-							Table4[2] = nil
-						end
-						--
-						Value = Table4
-					elseif Value:sub(1, 4) == "bool" then
-						local Bool = Value:sub(6, #Value - 1)
-						--
-						Value = Bool == "true"
-					elseif Value:sub(1, 5) == "table" then
-						local Table4 = string.split(Value:sub(7, #Value - 1), ",")
-						--
-						Value = Table4
-					elseif Value:sub(1, 6) == "string" then
-						local String = Value:sub(8, #Value - 1)
-						--
-						Value = String
-					elseif Value:sub(1, 6) == "number" then
-						local Number = tonumber(Value:sub(8, #Value - 1))
-						--
-						Value = Number
-					end
-					--
-					Table2[Table3[1]] = Value
-				end
-			end
-			--
-			for i, v in pairs(Table2) do
-				if Flags[i] then
-					if typeof(Flags[i]) == "table" then
-						Flags[i]:Set(v)
-					else
-						Flags[i](v)
-					end
-				end
-			end
-		end
-		--
-		function Library:SetOpen(bool)
-			if typeof(bool) == 'boolean' then
-				Library.Open = bool;
-				if Library.Open then
-					Library.Holder.Visible = true
-					--game:GetService("TweenService"):Create(Library.Holder, TweenInfo.new(0.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Library.OldSize.X.Offset,0,40)}):Play()
-					game:GetService("TweenService"):Create(Library.Holder, TweenInfo.new(0.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Library.OldSize.X.Offset,0,Library.OldSize.Y.Offset)}):Play()
-				else
-					--game:GetService("TweenService"):Create(Library.Holder, TweenInfo.new(0.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Library.OldSize.X.Offset,0,40)}):Play()
-					game:GetService("TweenService"):Create(Library.Holder, TweenInfo.new(0.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0,0,20)}):Play()
-					task.wait(0.25)
-					Library.Holder.Visible = false
-				end
-			end
-		end;
+    Connection:Disconnect()
+end
+
+function Library:Round(Number, Float)
+    return Float * math.floor(Number / Float)
+end
+
+function Library.NextFlag()
+    Library.UnNamedFlags += 1
+    return string.format("%.14g", Library.UnNamedFlags)
+end
+
+function Library:GetConfig()
+    local Config = ""
+    for Index, Value in pairs(self.Flags) do
+        if Index ~= "ConfigConfig_List" and Index ~= "ConfigConfig_Load" and Index ~= "ConfigConfig_Save" then
+            local Final = ""
+
+            if typeof(Value) == "Color3" then
+                local hue, sat, val = Value:ToHSV()
+                Final = ("rgb(%s,%s,%s,%s)"):format(hue, sat, val, 1)
+            elseif typeof(Value) == "table" and Value.Color and Value.Transparency then
+                local hue, sat, val = Value.Color:ToHSV()
+                Final = ("rgb(%s,%s,%s,%s)"):format(hue, sat, val, Value.Transparency)
+            elseif typeof(Value) == "table" and Value.Mode then
+                local Values = Value.current
+                Final = ("key(%s,%s,%s)"):format(Values[1] or "nil", Values[2] or "nil", Value.Mode)
+            elseif Value ~= nil then
+                local ValueType = typeof(Value)
+                if ValueType == "boolean" then
+                    Final = ("bool(%s)"):format(tostring(Value))
+                elseif ValueType == "table" then
+                    local New = "table("
+                    for _, Value3 in pairs(Value) do
+                        New = New .. Value3 .. ","
+                    end
+                    Final = New:sub(1, -2) .. ")" -- Remove trailing comma and add closing parenthesis
+                elseif ValueType == "string" then
+                    Final = ("string(%s)"):format(Value)
+                elseif ValueType == "number" then
+                    Final = ("number(%s)"):format(Value)
+                end
+            end
+
+            Config = Config .. Index .. ": " .. tostring(Final) .. "\n"
+        end
+    end
+    return Config
+end
+
+		
+
+function Library:LoadConfig(Config)
+    local configTable = {}
+    for _, line in ipairs(string.split(Config, "\n")) do
+        local key, value = string.match(line, "^(.-)%s*:%s*(.*)")
+        if key and value and key ~= "ConfigConfig_List" then
+            local valueType = value:sub(1, 3)
+            if valueType == "rgb" then
+                value = string.split(value:sub(5, -2), ",") 
+            elseif valueType == "key" then
+                value = string.split(value:sub(5, -2), ",")
+                if value[1] == "nil" and value[2] == "nil" then 
+                    value[1], value[2] = nil, nil 
+                end
+            elseif value:sub(1, 4) == "bool" then
+                value = value:sub(6, -2) == "true" 
+            elseif value:sub(1, 5) == "table" then
+                value = string.split(value:sub(7, -2), ",") 
+            elseif value:sub(1, 6) == "string" then
+                value = value:sub(8, -2) 
+            elseif value:sub(1, 6) == "number" then
+                value = tonumber(value:sub(8, -2)) 
+            end
+            configTable[key] = value
+        end
+    end
+    for i, v in pairs(configTable) do
+        if self.Flags[i] then
+            typeof(self.Flags[i]) == "table" and self.Flags[i]:Set(v) or self.Flags[i](v)
+        end
+    end
+end
+
+function Library:SetOpen(bool)
+    if typeof(bool) == 'boolean' then
+        self.Open = bool
+        local goalSize = bool and self.OldSize or UDim2.new(0, 0, 0, 20)
+        ts:Create(self.Holder, TweenInfo.new(.25, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = goalSize}):Play()
+        if not bool then task.wait(.25) self.Holder.Visible = false end
+    end
+end
+
 		--
 		function Library:ChangeAccent(Color)
-			Library.Accent = Color
+    self.Accent = Color
+    for obj, theme in next, self.ThemeObjects do
+        if theme:IsA("Frame") or theme:IsA("TextButton") then
+            theme.BackgroundColor3 = Color
+        elseif theme:IsA("TextLabel") then
+            theme.TextColor3 = Color
+        elseif theme:IsA("ScrollingFrame") then
+            theme.ScrollBarImageColor3 = Color -- Directly use Color instead of self.Accent
+        end
+    end
+end
 
-			for obj, theme in next, Library.ThemeObjects do
-				if theme:IsA("Frame") or theme:IsA("TextButton") then
-					theme.BackgroundColor3 = Color
-				elseif theme:IsA("TextLabel") then
-					theme.TextColor3 = Color
-				elseif theme:IsA("ScrollingFrame") then
-					theme.ScrollBarImageColor3 = Library.Accent
-				end
-			end
-		end
-		--
-		function Library:IsMouseOverFrame(Frame)
-			local AbsPos, AbsSize = Frame.AbsolutePosition, Frame.AbsoluteSize;
+function Library:IsMouseOverFrame(Frame)
+    local AbsPos, AbsSize = Frame.AbsolutePosition, Frame.AbsoluteSize
+    return Mouse.X >= AbsPos.X and Mouse.X <= AbsPos.X + AbsSize.X and Mouse.Y >= AbsPos.Y and Mouse.Y <= AbsPos.Y + AbsSize.Y
+end
 
-			if Mouse.X >= AbsPos.X and Mouse.X <= AbsPos.X + AbsSize.X
-				and Mouse.Y >= AbsPos.Y and Mouse.Y <= AbsPos.Y + AbsSize.Y then
 
-				return true;
-			end;
+	function Library:NewPicker(name, default, parent, count, flag, callback)
+    local ColorpickerFrame = Instance.new("TextButton")
+    ColorpickerFrame.Name = "Colorpicker_frame"
+    ColorpickerFrame.BackgroundColor3 = default
+    ColorpickerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ColorpickerFrame.BorderSizePixel = 0
+    ColorpickerFrame.Position = UDim2.new(1, count == 1 and - (count * 20) or - (count * 20) - (count * 4), 0.5, 0)
+    ColorpickerFrame.Size = UDim2.new(0, 20, 0, 20)
+    ColorpickerFrame.AnchorPoint = Vector2.new(0, 0.5)
+    ColorpickerFrame.Text = ""
+    ColorpickerFrame.AutoButtonColor = false
 
-			return false;
-		end;
-	end
+    local UICorner = Instance.new("UICorner")
+    UICorner.Name = "UICorner"
+    UICorner.CornerRadius = UDim.new(0, 4)
+    UICorner.Parent = ColorpickerFrame
+    local UIStroke = Instance.new("UIStroke")
+    UIStroke.Name = "UIStroke"
+    UIStroke.Color = Color3.fromRGB(40, 40, 40)
+    UIStroke.Parent = ColorpickerFrame
 
-	-- // Colorpicker Element
-	do
-		function Library:NewPicker(name, default, parent, count, flag, callback)
-			-- // Instances
-			local ColorpickerFrame = Instance.new("TextButton")
-			ColorpickerFrame.Name = "Colorpicker_frame"
-			ColorpickerFrame.BackgroundColor3 = default
-			ColorpickerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ColorpickerFrame.BorderSizePixel = 0
-			if count == 1 then
-				ColorpickerFrame.Position = UDim2.new(1, - (count * 20),0.5,0)
-			else
-				ColorpickerFrame.Position = UDim2.new(1, - (count * 20) - (count * 4),0.5,0)
-			end
-			ColorpickerFrame.Size = UDim2.new(0, 20, 0, 20)
-			ColorpickerFrame.AnchorPoint = Vector2.new(0,0.5)
-			ColorpickerFrame.Text = ""
-			ColorpickerFrame.AutoButtonColor = false
+    ColorpickerFrame.Parent = parent
 
-			local UICorner = Instance.new("UICorner")
-			UICorner.Name = "UICorner"
-			UICorner.CornerRadius = UDim.new(0, 4)
-			UICorner.Parent = ColorpickerFrame
+    local Colorpicker = Instance.new("TextButton")
+    Colorpicker.Name = "Colorpicker"
+    Colorpicker.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    Colorpicker.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Colorpicker.BorderSizePixel = 0
+    Colorpicker.Position = UDim2.new(0, ColorpickerFrame.AbsolutePosition.X - 100, 0, ColorpickerFrame.AbsolutePosition.Y - 50)
+    Colorpicker.Size = UDim2.new(0, 180, 0, 180)
+    Colorpicker.Parent = self.ScreenGUI -- Use self.ScreenGUI instead of Library.ScreenGUI
+    Colorpicker.ZIndex = 100
+    Colorpicker.Visible = false
+    Colorpicker.Text = ""
+    Colorpicker.AutoButtonColor = false
 
-			local UIStroke = Instance.new("UIStroke")
-			UIStroke.Name = "UIStroke"
-			UIStroke.Color = Color3.fromRGB(40, 40, 40)
-			UIStroke.Parent = ColorpickerFrame
+    local H, S, V = default:ToHSV()
+    local ImageLabel = Instance.new("ImageLabel")
+    ImageLabel.Name = "ImageLabel"
+    ImageLabel.Image = "rbxassetid://11970108040"
+    ImageLabel.BackgroundColor3 = Color3.fromHSV(H, 1, 1)
+    ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageLabel.BorderSizePixel = 0
+    ImageLabel.Position = UDim2.new(0.0556, 0, 0.026, 0)
+    ImageLabel.Size = UDim2.new(0, 160, 0, 154)
+    ImageLabel.Parent = Colorpicker
+        local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 6)
+    UICorner.Parent = Colorpicker
 
-			ColorpickerFrame.Parent = parent
+    local ImageButton = Instance.new("ImageButton")
+    ImageButton.Image = "rbxassetid://14684562507"
+    ImageButton.BackgroundColor3 = Color3.fromHSV(H, 1, 1)
+    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderSizePixel = 0
+    ImageButton.Position = UDim2.new(0.056, 0, 0.026, 0)
+    ImageButton.Size = UDim2.new(0, 160, 0, 154)
+    ImageButton.AutoButtonColor = false
+    
 
-			local Colorpicker = Instance.new("TextButton")
-			Colorpicker.Name = "Colorpicker"
-			Colorpicker.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-			Colorpicker.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Colorpicker.BorderSizePixel = 0
-			Colorpicker.Position = UDim2.new(0, ColorpickerFrame.AbsolutePosition.X - 100, 0, ColorpickerFrame.AbsolutePosition.Y - 50)
-			Colorpicker.Size = UDim2.new(0, 180, 0, 180)
-			Colorpicker.Parent = Library.ScreenGUI
-			Colorpicker.ZIndex = 100
-			Colorpicker.Visible = false
-			Colorpicker.Text = ""
-			Colorpicker.AutoButtonColor = false
-			local H,S,V = default:ToHSV()
-			local ImageLabel = Instance.new("ImageLabel")
-			ImageLabel.Name = "ImageLabel"
-			ImageLabel.Image = "rbxassetid://11970108040"
-			ImageLabel.BackgroundColor3 = Color3.fromHSV(H, 1, 1)
-			ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ImageLabel.BorderSizePixel = 0
-			ImageLabel.Position = UDim2.new(0.0556, 0, 0.026, 0)
-			ImageLabel.Size = UDim2.new(0, 160, 0, 154)
-			ImageLabel.Parent = Colorpicker
 
-			local UICorner = Instance.new("UICorner")
-			UICorner.Name = "UICorner"
-			UICorner.CornerRadius = UDim.new(0, 6)
-			UICorner.Parent = Colorpicker
 
-			local ImageButton = Instance.new("ImageButton")
-			ImageButton.Name = "ImageButton"
-			ImageButton.Image = "rbxassetid://14684562507"
-			ImageButton.BackgroundColor3 = Color3.fromHSV(H, 1, 1)
-			ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ImageButton.BorderSizePixel = 0
-			ImageButton.Position = UDim2.new(0.056, 0, 0.026, 0)
-			ImageButton.Size = UDim2.new(0, 160, 0, 154)
-			ImageButton.AutoButtonColor = false
 
-			local SVSlider = Instance.new("Frame")
-			SVSlider.Name = "SV_slider"
-			SVSlider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			SVSlider.BackgroundTransparency = 1
-			SVSlider.ClipsDescendants = true
-			SVSlider.Position = UDim2.new(0.855, 0, 0.0966, 0)
-			SVSlider.Size = UDim2.new(0,7,0,7)
-			SVSlider.ZIndex = 3
+			    local SVSlider = Instance.new("Frame")
+    SVSlider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SVSlider.BackgroundTransparency = 1
+    SVSlider.ClipsDescendants = true
+    SVSlider.Position = UDim2.new(0.855, 0, 0.0966, 0)
+    SVSlider.Size = UDim2.new(0, 7, 0, 7)
+    SVSlider.ZIndex = 3
 
-			local Val = Instance.new("ImageLabel")
-			Val.Name = "Val"
-			Val.Image = "http://www.roblox.com/asset/?id=14684563800"
-			Val.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Val.BackgroundTransparency = 1
-			Val.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Val.BorderSizePixel = 0
-			Val.Size = UDim2.new(1, 0, 1, 0)
-			Val.Parent = ImageButton
+    local Val = Instance.new("ImageLabel")
+    Val.Image = "http://www.roblox.com/asset/?id=14684563800"
+    Val.BackgroundTransparency = 1
+    Val.BorderSizePixel = 0
+    Val.Size = UDim2.new(1, 0, 1, 0)
+    Val.Parent = ImageButton
 
-			local UICorner1 = Instance.new("UICorner")
-			UICorner1.Name = "UICorner"
-			UICorner1.CornerRadius = UDim.new(0, 100)
-			UICorner1.Parent = SVSlider
+    local UICorner1 = Instance.new("UICorner")
+    UICorner1.CornerRadius = UDim.new(0, 100)
+    UICorner1.Parent = SVSlider
 
 			local UIStroke = Instance.new("UIStroke")
 			UIStroke.Name = "UIStroke"
