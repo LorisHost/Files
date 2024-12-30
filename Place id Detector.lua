@@ -1,0 +1,4 @@
+getgenv().Games = {
+  -- SANIC CHASE
+  [???] = "
+}  
