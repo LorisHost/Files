@@ -2,8 +2,8 @@ local PromptInterface = loadstring(game:HttpGet("https://raw.githubusercontent.c
 PromptInterface.create(
     "Moonsec V3 Obsfucator is down Wait Update Tomorrow ", -- Title
     "WARN : Some Functions Can Not Working Incorrectly", -- Description
-    "Will Wait", -- Primary Button Text
-    "NO LET ME PLAY WITH SCIRPT", -- Secondary Button Text
+    "LET ME PLAY", -- Primary Button Text
+    "Will Wait", -- Secondary Button Text
     function(response)
         if response then
 local placeScripts = {
