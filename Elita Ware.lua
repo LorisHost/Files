@@ -1,9 +1,9 @@
 local PromptInterface = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieCrumble2/Prompt-UI/refs/heads/main/load.lua"))()
 PromptInterface.create(
-    "Moonsec V3 Obsfucator is down Update Will be until will be Online", -- Title
-    "bugging functions", -- Description
-    "Accept", -- Primary Button Text
-    "Cancel", -- Secondary Button Text
+    "Moonsec V3 Obsfucator is down Wait Update Tomorrow ", -- Title
+    "WARN : Some Functions Can Not Working Incorrectly", -- Description
+    "Will Wait", -- Primary Button Text
+    "NO LET ME PLAY WITH SCIRPT", -- Secondary Button Text
     function(response)
         if response then
 local placeScripts = {
