@@ -1,9 +1,9 @@
 local PromptInterface = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieCrumble2/Prompt-UI/refs/heads/main/load.lua"))()
 PromptInterface.create(
-    "Stage Upload The Update", -- Title
-    "WARN : Some Functions Can Not Working Incorrectly", -- Description
-    "LET ME PLAY", -- Primary Button Text
-    "Will Wait", -- Secondary Button Text
+    "The Script Has Been Update", -- Title
+    "Enjoy", -- Description
+    "Execute", -- Primary Button Text
+    "Exit", -- Secondary Button Text
     function(response)
         if response then
 local placeScripts = {
