@@ -1,7 +1,7 @@
 local PromptInterface = loadstring(game:HttpGet("https://raw.githubusercontent.com/CookieCrumble2/Prompt-UI/refs/heads/main/load.lua"))()
 PromptInterface.create(
-    "The Script Has Been Update", -- Title
-    "Enjoy", -- Description
+    "can't continue the script...", -- Title
+    ":(", -- Description
     "Execute", -- Primary Button Text
     "Exit", -- Secondary Button Text
     function(response)
