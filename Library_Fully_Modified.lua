@@ -1,6 +1,12 @@
 local uis = game:GetService("UserInputService")
-local frame = script.Parent
+local frame = script.Parent -- Ensure this script is a child of a GUI Frame or object
 local dragging, dragInput, dragStart, startPos
+
+-- Ensure 'frame' is a GUI object
+if not frame:IsA("GuiObject") then
+    warn("This script must be a child of a GUI object (e.g., Frame)")
+    return
+end
 
 frame.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -19,7 +25,10 @@ end)
 uis.InputChanged:Connect(function(input)
     if dragging and input == dragInput then
         local delta = input.Position - dragStart
-        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        frame.Position = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
     end
 end)
 
